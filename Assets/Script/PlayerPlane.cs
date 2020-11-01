@@ -6,18 +6,32 @@ using UnityEngine;
 public class PlayerPlane : MonoBehaviour
 {
     public float speed;
+    public float currShotDelay;
+    public float maxShotDelay;
+    public float power;
     public Boolean isTouchTop;
     public Boolean isTouchBottom;
     public Boolean isTouchLeft;
     public Boolean isTouchRight;
 
+    public GameObject PlayerBulletA;
+    public GameObject PlayerBulletB;
+
     Animator anim;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
     }
 
     void Update()
+    {
+        Move();
+        Fire();
+        Reload();
+    }
+
+    void Move()
     {
         float horizon = Input.GetAxisRaw("Horizontal"); // x축 방향
         if ((isTouchRight && horizon == 1) || (isTouchLeft && horizon == -1))
@@ -26,21 +40,73 @@ public class PlayerPlane : MonoBehaviour
         }
 
         float vertical = Input.GetAxisRaw("Vertical"); // y축 방향
-        if ((isTouchRight && vertical == 1) || (isTouchLeft && vertical == -1))
+        if ((isTouchTop && vertical == 1) || (isTouchBottom && vertical == -1))
         {
             vertical = 0;
         }
+
         Vector3 currPosition = transform.position; // 현재위치
         Vector3 nextPosition = new Vector3(horizon, vertical, 0) * speed * Time.deltaTime; //다음 위치
 
         transform.position = currPosition + nextPosition;
-        
+
         // 애니메이션
         if (Input.GetButtonDown("Horizontal") ||
             Input.GetButtonUp("Horizontal"))
         {
-            anim.SetInteger("Input", (int)horizon);
-        } 
+            anim.SetInteger("Input", (int) horizon);
+        }
+    }
+
+    void Fire()
+    {
+        if (!Input.GetButton("Fire1"))
+        {
+            return;
+        }
+
+        if (currShotDelay < maxShotDelay)
+        {
+            return;
+        }
+
+        switch (power)
+        {
+            case 1:
+                GameObject bullet = Instantiate(PlayerBulletA, transform.position, transform.rotation); // 총알생성
+                Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+                rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                break;
+            
+            case 2:
+                GameObject bulletR = Instantiate(PlayerBulletA, transform.position + Vector3.right * 0.2f, transform.rotation);
+                GameObject bulletL = Instantiate(PlayerBulletA, transform.position + Vector3.left * 0.2f, transform.rotation);
+                Rigidbody2D rigid1 = bulletR.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigid2 = bulletL.GetComponent<Rigidbody2D>();
+                rigid1.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigid2.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                break;
+            
+            case 3:
+                GameObject bulletRR = Instantiate(PlayerBulletA, transform.position + Vector3.right * 0.4f, transform.rotation);
+                GameObject bulletCC = Instantiate(PlayerBulletB, transform.position, transform.rotation);
+                GameObject bulletLL = Instantiate(PlayerBulletA, transform.position + Vector3.left * 0.4f, transform.rotation);
+                Rigidbody2D rigidRR = bulletRR.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidC = bulletCC.GetComponent<Rigidbody2D>();
+                Rigidbody2D rigidLL = bulletLL.GetComponent<Rigidbody2D>();
+                rigidRR.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidC.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                rigidLL.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+                break;
+        }
+        
+
+        currShotDelay = 0;
+    }
+
+    void Reload()
+    {
+        currShotDelay += Time.deltaTime;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -67,7 +133,7 @@ public class PlayerPlane : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D collision)
-    { 
+    {
         // 벽에 부딪혔을 때 트리거 해제
         if (collision.gameObject.tag == "Border")
         {
