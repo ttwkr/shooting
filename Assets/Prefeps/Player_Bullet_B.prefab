@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9167292392785062266}
   - component: {fileID: 1885768228326376806}
   m_Layer: 0
-  m_Name: Player_Bullets_B
+  m_Name: Player_Bullet_B
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +123,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.27
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0

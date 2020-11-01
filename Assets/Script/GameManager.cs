@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public float currSpawnDelay;
     public float maxSpawnDelay;
 
+    public GameObject player;
+
     void Update()
     {
         currSpawnDelay += Time.deltaTime;
@@ -24,11 +26,45 @@ public class GameManager : MonoBehaviour
     void SpawnEnemy()
     {
         int randomEnemy = Random.Range(0, 3);
-        int randomPoint = Random.Range(0, 5);
-        Instantiate(
-                enemyObjects[randomEnemy], 
-                spawnPoints[randomPoint].position, 
-                spawnPoints[randomPoint].rotation
-            );
+        int randomPoint = Random.Range(0, 9);
+        GameObject enemy =  Instantiate(
+                                enemyObjects[randomEnemy], 
+                                spawnPoints[randomPoint].position, 
+                                spawnPoints[randomPoint].rotation
+                            );
+
+        Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
+        Enemy enemyLogic = enemy.GetComponent<Enemy>();
+        
+        // 발사체를 플레이어한테 주기위해 플레이어 변수를 선언
+        // 인스턴스화되지 않은 오브젝트한테 플레이어변수를 주지 않는다
+        enemyLogic.player = player;
+
+        if (randomPoint == 6 || randomPoint == 8) //오른쪽 스폰
+        {
+            enemy.transform.Rotate(Vector3.forward * 45); // 바라보는 방향으로 돌림
+            rigid.velocity = new Vector2(enemyLogic.speed,-1);
+        }
+        
+        else if (randomPoint == 7 || randomPoint == 9) //왼쪽 스폰
+        {
+            enemy.transform.Rotate(Vector3.back * 45); // 바라보는 방향으로 돌림
+            rigid.velocity = new Vector2(enemyLogic.speed*(-1),-1);
+        }
+        else
+        {
+            rigid.velocity = new Vector2(0,enemyLogic.speed*(-1));
+        }
+    }
+
+    public void RespawnPlayer()
+    {
+        Invoke("SpawnPlayer", 2f);
+    }
+
+    void SpawnPlayer()
+    {
+        player.transform.position = Vector3.down * 3.5f;
+        player.SetActive(true);
     }
 }

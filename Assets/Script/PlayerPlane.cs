@@ -14,6 +14,8 @@ public class PlayerPlane : MonoBehaviour
     public Boolean isTouchLeft;
     public Boolean isTouchRight;
 
+    public GameManager manager;
+
     public GameObject PlayerBulletA;
     public GameObject PlayerBulletB;
 
@@ -129,6 +131,14 @@ public class PlayerPlane : MonoBehaviour
                     isTouchRight = true;
                     break;
             }
+        }
+
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
+        {
+            // 피격하면 오브젝트 비활성화
+            
+            manager.RespawnPlayer();
+            gameObject.SetActive(false);
         }
     }
 
