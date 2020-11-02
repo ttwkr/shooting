@@ -9,6 +9,10 @@ public class PlayerPlane : MonoBehaviour
     public float currShotDelay;
     public float maxShotDelay;
     public float power;
+    public int life;
+    public int score;
+    public Boolean isHit;
+    
     public Boolean isTouchTop;
     public Boolean isTouchBottom;
     public Boolean isTouchLeft;
@@ -135,10 +139,25 @@ public class PlayerPlane : MonoBehaviour
 
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
         {
+            if (isHit)
+            {
+                return;
+            }
+
+            isHit = true;
             // 피격하면 오브젝트 비활성화
-            
-            manager.RespawnPlayer();
+            life--;
+            manager.UpdateLifeIcon(life);
+            if (life == 0)
+            {
+                manager.GameOver();
+            }
+            else
+            {
+                manager.RespawnPlayer();
+            }
             gameObject.SetActive(false);
+            Destroy(collision.gameObject);
         }
     }
 

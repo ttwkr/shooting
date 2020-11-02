@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
 
     public string enemySize;
+    public int enemyScore;
     public float speed;
     public float healthy;
     public Sprite[] sprites;
@@ -38,6 +39,8 @@ public class Enemy : MonoBehaviour
 
         if (healthy <= 0)
         {
+            PlayerPlane playerLogic = player.GetComponent<PlayerPlane>();
+            playerLogic.score += enemyScore;
             Destroy(gameObject);
         }
     }
