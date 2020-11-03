@@ -18,8 +18,8 @@ public class PlayerPlane : MonoBehaviour
     public Boolean isTouchLeft;
     public Boolean isTouchRight;
 
+    public Sprite[] sprites;
     public GameManager manager;
-
     public GameObject PlayerBulletA;
     public GameObject PlayerBulletB;
 

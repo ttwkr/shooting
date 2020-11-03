@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour
 
     void SpawnEnemy()
     {
-        int randomEnemy = Random.Range(0, 3);
-        int randomPoint = Random.Range(0, 9);
+        int randomEnemy = Random.Range(0, 2);
+        int randomPoint = Random.Range(0, 8);
         GameObject enemy =  Instantiate(
                                 enemyObjects[randomEnemy], 
                                 spawnPoints[randomPoint].position, 
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
             rigid.velocity = new Vector2(enemyLogic.speed,-1);
         }
         
-        else if (randomPoint == 7 || randomPoint == 9) //왼쪽 스폰
+        else if (randomPoint == 5 || randomPoint == 7) //왼쪽 스폰
         {
             enemy.transform.Rotate(Vector3.back * 45); // 바라보는 방향으로 돌림
             rigid.velocity = new Vector2(enemyLogic.speed*(-1),-1);
