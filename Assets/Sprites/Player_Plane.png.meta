@@ -1,31 +1,25 @@
 fileFormatVersion: 2
-guid: 3a2cdb290a73e489a84ed6f225e7acc2
+guid: 89b88463b5b9042b8989270e5a4a524f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1687611468826744058
-    second: planeon_0
+      213: -8784674404501363662
+    second: Player_Plane_0
   - first:
-      213: 8487715202299289591
-    second: planeon_1
+      213: -5544634299984188748
+    second: Player_Plane_1
   - first:
-      213: 6837875431166490179
-    second: planeon_2
+      213: 265620954461330555
+    second: Player_Plane_2
   - first:
-      213: -539764946662209838
-    second: planeon_3
+      213: -1226482097412852742
+    second: Player_Plane_3
   - first:
-      213: 1264388190307370680
-    second: planeon_4
+      213: -8777887980619964614
+    second: Player_Plane_4
   - first:
-      213: 7812454102965601253
-    second: planeon_5
-  - first:
-      213: -4249405513814470517
-    second: planeon_6
-  - first:
-      213: -6360080717829844697
-    second: planeon_7
+      213: -3681906767620252553
+    second: Player_Plane_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -137,127 +131,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: planeon_0
+      name: Player_Plane_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2
-        width: 32
-        height: 30
+        x: 3
+        y: 66
+        width: 26
+        height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60be4b97f466498e0800000000000000
-      internalID: -1687611468826744058
+      spriteID: 234ea3c1c21961680800000000000000
+      internalID: -8784674404501363662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: planeon_1
+      name: Player_Plane_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 2
-        width: 32
-        height: 30
+        x: 35
+        y: 66
+        width: 26
+        height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ff5bb3b10c6ac570800000000000000
-      internalID: 8487715202299289591
+      spriteID: 4baeefb1b708d03b0800000000000000
+      internalID: -5544634299984188748
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: planeon_2
+      name: Player_Plane_2
       rect:
         serializedVersion: 2
-        x: 64
-        y: 2
-        width: 32
-        height: 30
+        x: 3
+        y: 35
+        width: 22
+        height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 346bc0dd97305ee50800000000000000
-      internalID: 6837875431166490179
+      spriteID: b7c519bc9dcafa300800000000000000
+      internalID: 265620954461330555
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: planeon_3
+      name: Player_Plane_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 2
-        width: 32
-        height: 30
+        x: 35
+        y: 35
+        width: 22
+        height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d6cdfb04ae5288f0800000000000000
-      internalID: -539764946662209838
+      spriteID: af3b454d709aafee0800000000000000
+      internalID: -1226482097412852742
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: planeon_4
+      name: Player_Plane_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 2
-        width: 32
-        height: 30
+        x: 7
+        y: 3
+        width: 22
+        height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b6487d2c520c8110800000000000000
-      internalID: 1264388190307370680
+      spriteID: a3fd9fc836dae2680800000000000000
+      internalID: -8777887980619964614
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: planeon_5
+      name: Player_Plane_5
       rect:
         serializedVersion: 2
-        x: 160
-        y: 2
-        width: 32
-        height: 30
+        x: 39
+        y: 3
+        width: 22
+        height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e3ce4f4d996b6c60800000000000000
-      internalID: 7812454102965601253
+      spriteID: 77c53eb6d4d37ecc0800000000000000
+      internalID: -3681906767620252553
       vertices: []
       indices: 
       edges: []

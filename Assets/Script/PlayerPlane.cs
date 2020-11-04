@@ -9,6 +9,7 @@ public class PlayerPlane : MonoBehaviour
     public float currShotDelay;
     public float maxShotDelay;
     public float power;
+    public float maxPower;
     public int life;
     public int score;
     public Boolean isHit;
@@ -22,6 +23,7 @@ public class PlayerPlane : MonoBehaviour
     public GameManager manager;
     public GameObject PlayerBulletA;
     public GameObject PlayerBulletB;
+    public GameObject BoomEffect;
 
     Animator anim;
 
@@ -137,7 +139,7 @@ public class PlayerPlane : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
+        else if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
         {
             if (isHit)
             {
@@ -159,6 +161,60 @@ public class PlayerPlane : MonoBehaviour
             gameObject.SetActive(false);
             Destroy(collision.gameObject);
         }
+        
+        else if (collision.gameObject.tag == "Item")
+        {
+            Items item = collision.gameObject.GetComponent<Items>();
+
+            switch (item.type)
+            {
+                case "Coin":
+                    score += 1000;
+                    break;
+
+                case "Power":
+                    
+                    if (power == maxPower)
+                    {
+                        score += 500;
+                    }
+                    else
+                    {
+                        power++;
+                    }
+
+                    break;
+
+                case "Boom":
+
+                    //#1.폭탄 이펙트
+                    BoomEffect.SetActive(true);
+                    Invoke("RemoveBoomEffect",4f);
+
+                    //#2.적 제거
+                    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                    for (int i = 0; i < enemies.Length; i++)
+                    {
+                        Enemy enemyLogic = enemies[i].GetComponent<Enemy>();
+                        enemyLogic.OnHit(1000);
+                    }
+
+                    //#3. 총알 제거
+                    GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+                    for (int i = 0; i < bullets.Length; i++)
+                    {
+                        Destroy(bullets[i]);
+                    }
+
+                    break;
+            }
+            Destroy(collision.gameObject);
+        }
+    }
+
+    void RemoveBoomEffect()
+    {
+        BoomEffect.SetActive(false);
     }
 
     private void OnTriggerExit2D(Collider2D collision)

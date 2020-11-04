@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     void SpawnEnemy()
     {
-        int randomEnemy = Random.Range(0, 2);
+        int randomEnemy = Random.Range(0, 7);
         int randomPoint = Random.Range(0, 8);
         GameObject enemy =  Instantiate(
                                 enemyObjects[randomEnemy], 

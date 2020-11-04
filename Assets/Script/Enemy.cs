@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class Enemy : MonoBehaviour
     public float healthy;
     public Sprite[] sprites;
     public GameObject player;
-    
+    public GameObject[] itemObject;
+
     public float currShotDelay;
     public float maxShotDelay;
     public GameObject EnemyBulletA;
@@ -31,7 +33,7 @@ public class Enemy : MonoBehaviour
         Reload();
     }
 
-    void OnHit(int damage)
+    public void OnHit(int damage)
     {
         healthy -= damage;
         spriteRenderer.sprite = sprites[1];
@@ -40,8 +42,10 @@ public class Enemy : MonoBehaviour
         if (healthy <= 0)
         {
             PlayerPlane playerLogic = player.GetComponent<PlayerPlane>();
+            int randomItemIndex = Random.Range(0, 3);
             playerLogic.score += enemyScore;
             Destroy(gameObject);
+            GameObject item = Instantiate(itemObject[randomItemIndex], transform.position, transform.rotation);
         }
     }
 
