@@ -166,6 +166,7 @@ public class PlayerPlane : MonoBehaviour
         {
             Items item = collision.gameObject.GetComponent<Items>();
 
+            // 아이템
             switch (item.type)
             {
                 case "Coin":
