@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: db43d7b44ee1f4a45b49e5620fec3116, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 01cab2e65e8b8488f95a4d9b409734e2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1152,7 +1152,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: db43d7b44ee1f4a45b49e5620fec3116, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 01cab2e65e8b8488f95a4d9b409734e2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1670,7 +1670,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: db43d7b44ee1f4a45b49e5620fec3116, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 01cab2e65e8b8488f95a4d9b409734e2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1735,8 +1735,8 @@ MonoBehaviour:
   isTouchRight: 0
   sprites: []
   manager: {fileID: 1320954829}
-  PlayerBulletA: {fileID: 6247457638410026866, guid: 805de47ecf4c2449eabbc6d71199cb7e, type: 3}
-  PlayerBulletB: {fileID: 9167292392785062267, guid: 82257c6dbcc9a40f9a9bc56e3530bf31, type: 3}
+  PlayerBulletA: {fileID: 6247457638410026866, guid: cfe1235fac4bf4a78833c41ba84bfd70, type: 3}
+  PlayerBulletB: {fileID: 6247457638410026866, guid: d613684f57a2841e0961dfde14226e06, type: 3}
   BoomEffect: {fileID: 91782775}
 --- !u!212 &1571115806
 SpriteRenderer:

@@ -1,28 +1,37 @@
 fileFormatVersion: 2
-guid: 2fb84b787b11146c0839f73511a3c992
+guid: 17060857f045e422dba00e123633ef1d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 874343242196921964
-    second: Bullets_0
+      213: -791631602083109189
+    second: PlayerBullet_0
   - first:
-      213: -7976837497307082302
-    second: Bullets_1
+      213: 5021187605655070191
+    second: EnemyBullet_0
   - first:
-      213: -7803065417098437583
-    second: Bullets_2
+      213: 7025105873900256885
+    second: PlayerBullet_1
   - first:
-      213: 7431529995326980795
-    second: Bullets_3
+      213: -3864516459722358725
+    second: EnemyBullet_1
   - first:
-      213: -7779215486825634471
-    second: Bullets_4
+      213: -1158939802388268626
+    second: PlayerBullet_2
   - first:
-      213: 830317617348258784
-    second: Bullets_5
+      213: -330444688323888631
+    second: EnemyBullet_2
   - first:
-      213: 6112890488319390909
-    second: Bullets_6
+      213: -5990893173532539805
+    second: PlayerBullet_4
+  - first:
+      213: 3595752940752435657
+    second: EnemyBullet_4
+  - first:
+      213: -6360065783497653492
+    second: PlayerBullet_5
+  - first:
+      213: -6405150166598918545
+    second: EnemyBullet_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -134,148 +143,211 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bullets_0
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 5
-        width: 4
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c6e29eadb8a422c00800000000000000
-      internalID: 874343242196921964
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullets_1
+      name: PlayerBullet_0
       rect:
         serializedVersion: 2
         x: 12
-        y: 1
-        width: 8
-        height: 11
+        y: 40
+        width: 7
+        height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c1defd2f849c4190800000000000000
-      internalID: -7976837497307082302
+      spriteID: bb6ecdc804f8305f0800000000000000
+      internalID: -791631602083109189
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bullets_2
+      name: EnemyBullet_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 0
-        width: 4
-        height: 12
+        x: 44
+        y: 40
+        width: 7
+        height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13c56b67851f5b390800000000000000
-      internalID: -7803065417098437583
+      spriteID: fe52aa12687dea540800000000000000
+      internalID: 5021187605655070191
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bullets_3
+      name: PlayerBullet_1
       rect:
         serializedVersion: 2
-        x: 35
-        y: 3
-        width: 6
-        height: 9
+        x: 76
+        y: 40
+        width: 7
+        height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb200252829122760800000000000000
-      internalID: 7431529995326980795
+      spriteID: 57eb55b52903e7160800000000000000
+      internalID: 7025105873900256885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bullets_4
+      name: EnemyBullet_1
       rect:
         serializedVersion: 2
-        x: 46
-        y: 4
-        width: 6
-        height: 8
+        x: 108
+        y: 40
+        width: 7
+        height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9556a841bbcaa0490800000000000000
-      internalID: -7779215486825634471
+      spriteID: b30499541ca7e5ac0800000000000000
+      internalID: -3864516459722358725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bullets_5
+      name: PlayerBullet_2
       rect:
         serializedVersion: 2
-        x: 58
-        y: 0
-        width: 4
-        height: 12
+        x: 140
+        y: 40
+        width: 7
+        height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ebaac84971e58b00800000000000000
-      internalID: 830317617348258784
+      spriteID: ea9f59ad36e9aefe0800000000000000
+      internalID: -1158939802388268626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bullets_6
+      name: EnemyBullet_2
       rect:
         serializedVersion: 2
-        x: 66
-        y: 2
-        width: 10
-        height: 10
+        x: 12
+        y: 8
+        width: 7
+        height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db4342bf28955d450800000000000000
-      internalID: 6112890488319390909
+      spriteID: 90a3a868e460a6bf0800000000000000
+      internalID: -330444688323888631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerBullet_4
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 8
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 364c74856621cdca0800000000000000
+      internalID: -5990893173532539805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyBullet_4
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 8
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c97d9d9f3ea6e130800000000000000
+      internalID: 3595752940752435657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerBullet_5
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 8
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c038182fdd18cb7a0800000000000000
+      internalID: -6360065783497653492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyBullet_5
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 8
+        width: 7
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6e56d20cd55c17a0800000000000000
+      internalID: -6405150166598918545
       vertices: []
       indices: 
       edges: []
