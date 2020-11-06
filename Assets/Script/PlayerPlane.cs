@@ -135,7 +135,7 @@ public class PlayerPlane : MonoBehaviour
 
         boom--;
         isBoomTime = true;
-        manager.UpdateBoomImage(boom);
+        manager.UpdateIcon(manager.boomImages,boom);
         //#1.폭탄 이펙트
         BoomEffect.SetActive(true);
         
@@ -195,7 +195,7 @@ public class PlayerPlane : MonoBehaviour
             isHit = true;
             // 피격하면 오브젝트 비활성화
             life--;
-            manager.UpdateLifeIcon(life);
+            manager.UpdateIcon(manager.lifeImage,life);
             if (life == 0)
             {
                 manager.GameOver();
@@ -240,7 +240,7 @@ public class PlayerPlane : MonoBehaviour
                     else
                     {
                         boom++;
-                        manager.UpdateBoomImage(boom);
+                        manager.UpdateIcon(manager.boomImages, boom);
                     }
                     break;
             }

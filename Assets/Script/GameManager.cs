@@ -66,33 +66,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UpdateLifeIcon(int life)
+    public void UpdateIcon(Image[] image, int icon)
     {
         for (int i = 0; i < 3; i++)
         {
             // 아이콘 비활성화
-            lifeImage[i].color = new Color(1, 1, 1, 0);
+            image[i].color = new Color(1, 1, 1, 0);
         }
         
-        for (int i = 0; i < life; i++)
+        for (int i = 0; i < icon; i++)
         {
             // 아이콘 활성화
-            lifeImage[i].color = new Color(1, 1, 1, 1);
-        }
-    }
-
-    public void UpdateBoomImage(int boom)
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            // 아이콘 비활성화
-            boomImages[i].color = new Color(1, 1, 1, 0);
-        }
-        
-        for (int i = 0; i < boom; i++)
-        {
-            // 아이콘 활성화
-            boomImages[i].color = new Color(1, 1, 1, 1);
+            image[i].color = new Color(1, 1, 1, 1);
         }
     }
 
