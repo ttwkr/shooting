@@ -35,6 +35,10 @@ public class Enemy : MonoBehaviour
 
     public void OnHit(int damage)
     {
+        if (healthy <= 0)
+        {
+            return;
+        }
         healthy -= damage;
         spriteRenderer.sprite = sprites[1];
         Invoke("ReturnSprite", 0.1f);
@@ -45,7 +49,7 @@ public class Enemy : MonoBehaviour
             int randomItemIndex = Random.Range(0, 3);
             playerLogic.score += enemyScore;
             Destroy(gameObject);
-            GameObject item = Instantiate(itemObject[randomItemIndex], transform.position, transform.rotation);
+            Instantiate(itemObject[randomItemIndex], transform.position, itemObject[randomItemIndex].transform.rotation);
         }
     }
 

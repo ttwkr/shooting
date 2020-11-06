@@ -10,9 +10,12 @@ public class PlayerPlane : MonoBehaviour
     public float maxShotDelay;
     public float power;
     public float maxPower;
+    public float maxBoom;
+    public int boom;
     public int life;
     public int score;
     public Boolean isHit;
+    public Boolean isBoomTime;
     
     public Boolean isTouchTop;
     public Boolean isTouchBottom;
@@ -36,6 +39,7 @@ public class PlayerPlane : MonoBehaviour
     {
         Move();
         Fire();
+        FireBoom();
         Reload();
     }
 
@@ -110,6 +114,48 @@ public class PlayerPlane : MonoBehaviour
         
 
         currShotDelay = 0;
+    }
+
+    void FireBoom()
+    {
+        if (!Input.GetButton("Fire2"))
+        {
+            return;
+        }
+
+        if (isBoomTime)
+        {
+            return;
+        }
+
+        if (boom == 0)
+        {
+            return;
+        }
+
+        boom--;
+        isBoomTime = true;
+        manager.UpdateBoomImage(boom);
+        //#1.폭탄 이펙트
+        BoomEffect.SetActive(true);
+        
+        Invoke("RemoveBoomEffect",4f);
+
+        //#2.적 제거
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Enemy enemyLogic = enemies[i].GetComponent<Enemy>();
+            enemyLogic.OnHit(1000);
+        }
+
+        //#3. 총알 제거
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        for (int i = 0; i < bullets.Length; i++)
+        {
+            Destroy(bullets[i]);
+        }
+        
     }
 
     void Reload()
@@ -187,26 +233,15 @@ public class PlayerPlane : MonoBehaviour
                     break;
 
                 case "Boom":
-
-                    //#1.폭탄 이펙트
-                    BoomEffect.SetActive(true);
-                    Invoke("RemoveBoomEffect",4f);
-
-                    //#2.적 제거
-                    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                    for (int i = 0; i < enemies.Length; i++)
+                    if (boom == maxBoom)
                     {
-                        Enemy enemyLogic = enemies[i].GetComponent<Enemy>();
-                        enemyLogic.OnHit(1000);
+                        score += 1000;
                     }
-
-                    //#3. 총알 제거
-                    GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
-                    for (int i = 0; i < bullets.Length; i++)
+                    else
                     {
-                        Destroy(bullets[i]);
+                        boom++;
+                        manager.UpdateBoomImage(boom);
                     }
-
                     break;
             }
             Destroy(collision.gameObject);
@@ -216,6 +251,7 @@ public class PlayerPlane : MonoBehaviour
     void RemoveBoomEffect()
     {
         BoomEffect.SetActive(false);
+        isBoomTime = false;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
