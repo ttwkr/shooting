@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySize: L
   enemyScore: 500
-  speed: 1
+  speed: 3
   healthy: 4
   sprites:
   - {fileID: -1820404124228721701, guid: e98cb10641fed4d34942c146b1d02377, type: 3}
