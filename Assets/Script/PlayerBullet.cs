@@ -10,7 +10,7 @@ public class PlayerBullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "BorderBullet")
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

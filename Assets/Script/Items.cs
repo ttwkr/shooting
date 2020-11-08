@@ -12,6 +12,11 @@ public class Items : MonoBehaviour
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        rigid.velocity = Vector2.down * itemSpeed;
+    }
+
+    private void OnEnable()
+    {
+        rigid.velocity = Vector2.down * itemSpeed ; 
+            
     }
 }

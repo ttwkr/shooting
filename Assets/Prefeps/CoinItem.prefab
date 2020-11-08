@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: Coin
-  itemSpeed: 0.5
+  itemSpeed: 1
 --- !u!95 &4860568106406641054
 Animator:
   serializedVersion: 3

@@ -1,22 +1,32 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] enemyObjects;
+    public string[] enemyObjects;
     public Transform[] spawnPoints;
 
     public float currSpawnDelay;
     public float maxSpawnDelay;
+    public float rangeSpawn;
 
     public GameObject player;
     public Text scoreText;
     public Image[] lifeImage;
     public Image[] boomImages;
     public GameObject gameOverSet;
+    public ObjectManager objectManager;
+
+    private void Awake()
+    {
+        enemyObjects = new string[]
+            {"enemyRed", "enemyOrange", "enemyYello", "enemyGreen", "enemyBlue", "enemyNavy", "enemyPurple"};
+    }
 
     void Update()
     {
@@ -24,7 +34,7 @@ public class GameManager : MonoBehaviour
         if (currSpawnDelay > maxSpawnDelay)
         {
             SpawnEnemy();
-            maxSpawnDelay = Random.Range(0.5f, 3f);
+            maxSpawnDelay = Random.Range(0.5f, rangeSpawn);
             currSpawnDelay = 0;
         }
 
@@ -34,35 +44,34 @@ public class GameManager : MonoBehaviour
 
     void SpawnEnemy()
     {
-        int randomEnemy = Random.Range(0, 7);
+        int randomEnemyIndex = Random.Range(0, enemyObjects.Length);
         int randomPoint = Random.Range(0, 8);
-        GameObject enemy =  Instantiate(
-                                enemyObjects[randomEnemy], 
-                                spawnPoints[randomPoint].position, 
-                                spawnPoints[randomPoint].rotation
-                            );
+
+        GameObject enemy = objectManager.MakeObj(enemyObjects[randomEnemyIndex]);
+        enemy.transform.position = spawnPoints[randomPoint].position;
 
         Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
         Enemy enemyLogic = enemy.GetComponent<Enemy>();
-        
+
         // 발사체를 플레이어한테 주기위해 플레이어 변수를 선언
         // 인스턴스화되지 않은 오브젝트한테 플레이어변수를 주지 않는다
         enemyLogic.player = player;
+        enemyLogic.objectManager = objectManager;
 
         if (randomPoint == 6 || randomPoint == 8) //오른쪽 스폰
         {
             enemy.transform.Rotate(Vector3.forward * 45); // 바라보는 방향으로 돌림
-            rigid.velocity = new Vector2(enemyLogic.speed,-1);
+            rigid.velocity = new Vector2(enemyLogic.speed, -1);
         }
-        
+
         else if (randomPoint == 5 || randomPoint == 7) //왼쪽 스폰
         {
             enemy.transform.Rotate(Vector3.back * 45); // 바라보는 방향으로 돌림
-            rigid.velocity = new Vector2(enemyLogic.speed*(-1),-1);
+            rigid.velocity = new Vector2(enemyLogic.speed * (-1), -1);
         }
         else
         {
-            rigid.velocity = new Vector2(0,enemyLogic.speed*(-1));
+            rigid.velocity = new Vector2(0, enemyLogic.speed * (-1));
         }
     }
 
@@ -73,7 +82,7 @@ public class GameManager : MonoBehaviour
             // 아이콘 비활성화
             image[i].color = new Color(1, 1, 1, 0);
         }
-        
+
         for (int i = 0; i < icon; i++)
         {
             // 아이콘 활성화

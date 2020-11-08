@@ -13,7 +13,8 @@ public class Enemy : MonoBehaviour
     public float healthy;
     public Sprite[] sprites;
     public GameObject player;
-    public GameObject[] itemObject;
+    public ObjectManager objectManager;
+    public string[] itemObject;
 
     public float currShotDelay;
     public float maxShotDelay;
@@ -25,6 +26,23 @@ public class Enemy : MonoBehaviour
     public void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        itemObject = new string[] {"itemPower", "itemBoom", "itemCoin"};
+    }
+
+    private void OnEnable()
+    {
+        switch (enemySize)
+        {
+            case "L":
+                healthy = 4;
+                break;
+            case "M":
+                healthy = 3;
+                break;
+            case "S":
+                healthy = 2;
+                break;
+        }
     }
 
     private void Update()
@@ -48,8 +66,11 @@ public class Enemy : MonoBehaviour
             PlayerPlane playerLogic = player.GetComponent<PlayerPlane>();
             int randomItemIndex = Random.Range(0, 3);
             playerLogic.score += enemyScore;
-            Destroy(gameObject);
-            Instantiate(itemObject[randomItemIndex], transform.position, itemObject[randomItemIndex].transform.rotation);
+            gameObject.SetActive(false);
+            GameObject item = objectManager.MakeObj(itemObject[randomItemIndex]);
+            item.transform.position = transform.position;
+            transform.rotation = Quaternion.identity;
+            
         }
     }
 
@@ -62,14 +83,15 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "BorderBullet")
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            transform.rotation = Quaternion.identity;
         }
         else if (collision.gameObject.tag == "PlayerBullet")
         {
             PlayerBullet playerBullet = collision.gameObject.GetComponent<PlayerBullet>();
             OnHit(playerBullet.damage);
             
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
     }
     
@@ -82,7 +104,8 @@ public class Enemy : MonoBehaviour
 
         if (enemySize == "S")
         {
-            GameObject enemyBullet = Instantiate(EnemyBulletA, transform.position, transform.rotation);
+            GameObject enemyBullet = objectManager.MakeObj("enemyBulletA");
+            enemyBullet.transform.position = transform.position;
             Rigidbody2D rigid = enemyBullet.GetComponent<Rigidbody2D>();
             
             // 플레이어에게 쏴야한다
@@ -92,9 +115,12 @@ public class Enemy : MonoBehaviour
         }
         else if (enemySize == "L")
         {
-            GameObject enemyBulletR = Instantiate(EnemyBulletB, transform.position + Vector3.right * 0.4f, transform.rotation);
-            GameObject enemyBulletL = Instantiate(EnemyBulletB, transform.position + Vector3.left * 0.4f, transform.rotation);
-            
+            GameObject enemyBulletR = objectManager.MakeObj("enemyBulletB");
+            enemyBulletR.transform.position = transform.position + Vector3.right * 0.4f;
+                
+            GameObject enemyBulletL = objectManager.MakeObj("enemyBulletB");
+            enemyBulletL.transform.position = transform.position + Vector3.left * 0.4f;
+
             Rigidbody2D rigidR = enemyBulletR.GetComponent<Rigidbody2D>();
             Rigidbody2D rigidL = enemyBulletL.GetComponent<Rigidbody2D>();
             

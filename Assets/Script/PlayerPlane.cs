@@ -24,6 +24,7 @@ public class PlayerPlane : MonoBehaviour
 
     public Sprite[] sprites;
     public GameManager manager;
+    public ObjectManager objectManager;
     public GameObject PlayerBulletA;
     public GameObject PlayerBulletB;
     public GameObject BoomEffect;
@@ -85,14 +86,19 @@ public class PlayerPlane : MonoBehaviour
         switch (power)
         {
             case 1:
-                GameObject bullet = Instantiate(PlayerBulletA, transform.position, transform.rotation); // 총알생성
+                GameObject bullet = objectManager.MakeObj("playerBulletA");
+                bullet.transform.position = transform.position;
                 Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
                 rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
                 break;
             
             case 2:
-                GameObject bulletR = Instantiate(PlayerBulletA, transform.position + Vector3.right * 0.2f, transform.rotation);
-                GameObject bulletL = Instantiate(PlayerBulletA, transform.position + Vector3.left * 0.2f, transform.rotation);
+                GameObject bulletR = objectManager.MakeObj("playerBulletA");
+                bulletR.transform.position = transform.position + Vector3.right * 0.2f;
+                
+                GameObject bulletL = objectManager.MakeObj("playerBulletA");
+                bulletL.transform.position = transform.position + Vector3.left * 0.2f;
+                
                 Rigidbody2D rigid1 = bulletR.GetComponent<Rigidbody2D>();
                 Rigidbody2D rigid2 = bulletL.GetComponent<Rigidbody2D>();
                 rigid1.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
@@ -100,9 +106,15 @@ public class PlayerPlane : MonoBehaviour
                 break;
             
             case 3:
-                GameObject bulletRR = Instantiate(PlayerBulletA, transform.position + Vector3.right * 0.4f, transform.rotation);
-                GameObject bulletCC = Instantiate(PlayerBulletB, transform.position, transform.rotation);
-                GameObject bulletLL = Instantiate(PlayerBulletA, transform.position + Vector3.left * 0.4f, transform.rotation);
+                GameObject bulletRR = objectManager.MakeObj("playerBulletA");
+                bulletRR.transform.position = transform.position + Vector3.right * 0.4f;
+                    
+                GameObject bulletCC = objectManager.MakeObj("playerBulletB");
+                bulletCC.transform.position = transform.position;
+                    
+                GameObject bulletLL = objectManager.MakeObj("playerBulletA");
+                bulletLL.transform.position = transform.position + Vector3.left * 0.4f;
+                    
                 Rigidbody2D rigidRR = bulletRR.GetComponent<Rigidbody2D>();
                 Rigidbody2D rigidC = bulletCC.GetComponent<Rigidbody2D>();
                 Rigidbody2D rigidLL = bulletLL.GetComponent<Rigidbody2D>();
@@ -142,20 +154,51 @@ public class PlayerPlane : MonoBehaviour
         Invoke("RemoveBoomEffect",4f);
 
         //#2.적 제거
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            Enemy enemyLogic = enemies[i].GetComponent<Enemy>();
-            enemyLogic.OnHit(1000);
-        }
+        GameObject[] enemyRed = objectManager.GetPool("enemyRed");
+        GameObject[] enemyOrange = objectManager.GetPool("enemyOrange");
+        GameObject[] enemyYello = objectManager.GetPool("enemyYello");
+        GameObject[] enemyGreen = objectManager.GetPool("enemyGreen");
+        GameObject[] enemyBlue = objectManager.GetPool("enemyBlue");
+        GameObject[] enemyNavy = objectManager.GetPool("enemyNavy");
+        GameObject[] enemyPurple = objectManager.GetPool("enemyPurple");
+        ObjectForSyntax(enemyRed);
+        ObjectForSyntax(enemyOrange);
+        ObjectForSyntax(enemyYello);
+        ObjectForSyntax(enemyGreen);
+        ObjectForSyntax(enemyBlue);
+        ObjectForSyntax(enemyNavy);
+        ObjectForSyntax(enemyPurple);
 
         //#3. 총알 제거
-        GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
-        for (int i = 0; i < bullets.Length; i++)
+        GameObject[] bulletA = objectManager.GetPool("enemyBulletA");
+        GameObject[] bulletB = objectManager.GetPool("enemyBulletB");
+        for (int i = 0; i < bulletA.Length; i++)
         {
-            Destroy(bullets[i]);
+            if (bulletA[i].activeSelf)
+            {
+                bulletA[i].SetActive(false);
+            }
+        }
+        for (int i = 0; i < bulletB.Length; i++)
+        {
+            if (bulletB[i].activeSelf)
+            {
+                bulletB[i].SetActive(false);
+            }
         }
         
+    }
+
+    void ObjectForSyntax(GameObject[] obj)
+    {
+        for (int i = 0; i < obj.Length; i++)
+        {
+            if (obj[i].activeSelf)
+            {
+                Enemy enemyLogic = obj[i].GetComponent<Enemy>();
+                enemyLogic.OnHit(1000);
+            }
+        }
     }
 
     void Reload()
@@ -205,7 +248,7 @@ public class PlayerPlane : MonoBehaviour
                 manager.RespawnPlayer();
             }
             gameObject.SetActive(false);
-            Destroy(collision.gameObject);
+            // Destroy(collision.gameObject);
         }
         
         else if (collision.gameObject.tag == "Item")
@@ -244,7 +287,7 @@ public class PlayerPlane : MonoBehaviour
                     }
                     break;
             }
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
     }
 
