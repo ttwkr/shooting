@@ -16,7 +16,7 @@ public class PlayerPlane : MonoBehaviour
     public int score;
     public Boolean isHit;
     public Boolean isBoomTime;
-    
+
     public Boolean isTouchTop;
     public Boolean isTouchBottom;
     public Boolean isTouchLeft;
@@ -91,30 +91,30 @@ public class PlayerPlane : MonoBehaviour
                 Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
                 rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
                 break;
-            
+
             case 2:
                 GameObject bulletR = objectManager.MakeObj("playerBulletA");
                 bulletR.transform.position = transform.position + Vector3.right * 0.2f;
-                
+
                 GameObject bulletL = objectManager.MakeObj("playerBulletA");
                 bulletL.transform.position = transform.position + Vector3.left * 0.2f;
-                
+
                 Rigidbody2D rigid1 = bulletR.GetComponent<Rigidbody2D>();
                 Rigidbody2D rigid2 = bulletL.GetComponent<Rigidbody2D>();
                 rigid1.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
                 rigid2.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
                 break;
-            
+
             case 3:
                 GameObject bulletRR = objectManager.MakeObj("playerBulletA");
                 bulletRR.transform.position = transform.position + Vector3.right * 0.4f;
-                    
+
                 GameObject bulletCC = objectManager.MakeObj("playerBulletB");
                 bulletCC.transform.position = transform.position;
-                    
+
                 GameObject bulletLL = objectManager.MakeObj("playerBulletA");
                 bulletLL.transform.position = transform.position + Vector3.left * 0.4f;
-                    
+
                 Rigidbody2D rigidRR = bulletRR.GetComponent<Rigidbody2D>();
                 Rigidbody2D rigidC = bulletCC.GetComponent<Rigidbody2D>();
                 Rigidbody2D rigidLL = bulletLL.GetComponent<Rigidbody2D>();
@@ -123,7 +123,7 @@ public class PlayerPlane : MonoBehaviour
                 rigidLL.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
                 break;
         }
-        
+
 
         currShotDelay = 0;
     }
@@ -147,11 +147,11 @@ public class PlayerPlane : MonoBehaviour
 
         boom--;
         isBoomTime = true;
-        manager.UpdateIcon(manager.boomImages,boom);
+        manager.UpdateIcon(manager.boomImages, boom);
         //#1.폭탄 이펙트
         BoomEffect.SetActive(true);
-        
-        Invoke("RemoveBoomEffect",4f);
+
+        Invoke("RemoveBoomEffect", 4f);
 
         //#2.적 제거
         GameObject[] enemyRed = objectManager.GetPool("enemyRed");
@@ -179,6 +179,7 @@ public class PlayerPlane : MonoBehaviour
                 bulletA[i].SetActive(false);
             }
         }
+
         for (int i = 0; i < bulletB.Length; i++)
         {
             if (bulletB[i].activeSelf)
@@ -186,7 +187,6 @@ public class PlayerPlane : MonoBehaviour
                 bulletB[i].SetActive(false);
             }
         }
-        
     }
 
     void ObjectForSyntax(GameObject[] obj)
@@ -238,7 +238,9 @@ public class PlayerPlane : MonoBehaviour
             isHit = true;
             // 피격하면 오브젝트 비활성화
             life--;
-            manager.UpdateIcon(manager.lifeImage,life);
+            boom = 0;
+            manager.UpdateIcon(manager.lifeImage, life);
+            manager.UpdateIcon(manager.boomImages, boom);
             if (life == 0)
             {
                 manager.GameOver();
@@ -247,10 +249,11 @@ public class PlayerPlane : MonoBehaviour
             {
                 manager.RespawnPlayer();
             }
+
             gameObject.SetActive(false);
             // Destroy(collision.gameObject);
         }
-        
+
         else if (collision.gameObject.tag == "Item")
         {
             Items item = collision.gameObject.GetComponent<Items>();
@@ -263,7 +266,7 @@ public class PlayerPlane : MonoBehaviour
                     break;
 
                 case "Power":
-                    
+
                     if (power == maxPower)
                     {
                         score += 500;
@@ -285,8 +288,10 @@ public class PlayerPlane : MonoBehaviour
                         boom++;
                         manager.UpdateIcon(manager.boomImages, boom);
                     }
+
                     break;
             }
+
             collision.gameObject.SetActive(false);
         }
     }
