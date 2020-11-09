@@ -1,0 +1,6 @@
+1,enemyOrange,1
+0.2,enemyRed,2
+0.2,enemyRed,2
+0.2,enemyRed,2
+0.2,enemyRed,2
+0.2,enemyRed,2

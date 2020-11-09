@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,10 +23,46 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverSet;
     public ObjectManager objectManager;
 
+
+    public List<Spawn> spawnList;
+    public int spawnIndex;
+    public bool spawnEnd;
+    
     private void Awake()
     {
+        spawnList = new List<Spawn>();
         enemyObjects = new string[]
             {"enemyRed", "enemyOrange", "enemyYello", "enemyGreen", "enemyBlue", "enemyNavy", "enemyPurple"};
+    }
+
+    void ReadSpawnFile()
+    {
+        spawnList.Clear();
+        spawnIndex = 0;
+        spawnEnd = false;
+        
+        TextAsset textFile = Resources.Load("Stage 0") as TextAsset;
+        StringReader stringReader = new StringReader(textFile.text);
+
+        while (stringReader != null)
+        {
+            string line = stringReader.ReadLine();
+
+            if (line == null)
+            {
+                break;
+            }
+            
+            // 텍스트 한줄씩 반환
+        
+            Spawn spawnData = new Spawn();
+            spawnData.delay = float.Parse(line.Split(',')[0]);
+            spawnData.type = line.Split(',')[1];
+            spawnData.point = int.Parse(line.Split(',')[2]);
+        
+            spawnList.Add(spawnData);
+        }
+        stringReader.Close();
     }
 
     void Update()
