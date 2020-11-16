@@ -15,6 +15,7 @@ public class ObjectManager : MonoBehaviour
     public GameObject enemyBulletBPrefab;
     public GameObject playerBulletAPrefab;
     public GameObject playerBulletBPrefab;
+    public GameObject followerBulletPrefab;
     public GameObject itemPowerPrefab;
     public GameObject itemBoomPrefab;
     public GameObject itemCoinPrefab;
@@ -32,6 +33,7 @@ public class ObjectManager : MonoBehaviour
     private GameObject[] enemyBulletB;
     private GameObject[] playerBulletA;
     private GameObject[] playerBulletB;
+    private GameObject[] followerBullet;
 
     private GameObject[] itemPower;
     private GameObject[] itemBoom;
@@ -54,6 +56,7 @@ public class ObjectManager : MonoBehaviour
         enemyBulletB = new GameObject[200];
         playerBulletA = new GameObject[200];
         playerBulletB = new GameObject[200];
+        followerBullet = new GameObject[200];
 
         itemPower = new GameObject[10];
         itemBoom = new GameObject[10];
@@ -76,6 +79,7 @@ public class ObjectManager : MonoBehaviour
         GenerateObject(enemyBulletB, enemyBulletBPrefab);
         GenerateObject(playerBulletA, playerBulletAPrefab);
         GenerateObject(playerBulletB, playerBulletBPrefab);
+        GenerateObject(followerBullet, followerBulletPrefab);
 
         GenerateObject(itemPower, itemPowerPrefab);
         GenerateObject(itemBoom, itemBoomPrefab);
@@ -138,13 +142,18 @@ public class ObjectManager : MonoBehaviour
                 targetPool = enemyPurple;
                 break;
             
-            // 플레이어
+            // 플레이어 총알
             case "playerBulletA":
                 targetPool = playerBulletA;
                 break;
             case "playerBulletB":
                 targetPool = playerBulletB;
                 break;
+            case "followerBullet":
+                targetPool = followerBullet;
+                break;
+            
+            // 적 총알
             case "enemyBulletA":
                 targetPool = enemyBulletA;
                 break;
