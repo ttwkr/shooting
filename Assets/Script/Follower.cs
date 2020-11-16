@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,8 +14,13 @@ public class Follower : MonoBehaviour
     public int followDelay;
     public Transform parents;
     public Queue<Vector3> parentsPos;
-    
-    
+
+
+    private void Awake()
+    {
+        parentsPos = new Queue<Vector3>();
+    }
+
     void Update()
     {
         Watch();
@@ -25,8 +31,15 @@ public class Follower : MonoBehaviour
 
     void Watch()
     {
+        // 큐에 넣는다
+        parentsPos.Enqueue(parents.position);
         // 따라갈 위치를 계속 갱신
-        followPos = parents.position;
+        if (parentsPos.Count > followDelay)
+        {
+            // 큐에 일정 데이터가 채워지면 그때부터 반환
+            followPos = parentsPos.Dequeue();    
+        }
+        
     }
 
     void Follow()
