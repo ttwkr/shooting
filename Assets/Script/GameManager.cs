@@ -54,11 +54,11 @@ public class GameManager : MonoBehaviour
             }
             
             // 텍스트 한줄씩 반환
-        
+            string[] splited_list = line.Split(',');
             Spawn spawnData = new Spawn();
-            spawnData.delay = float.Parse(line.Split(',')[0]);
-            spawnData.type = line.Split(',')[1];
-            spawnData.point = int.Parse(line.Split(',')[2]);
+            spawnData.delay = float.Parse(splited_list[0]);
+            spawnData.type = splited_list[1];
+            spawnData.point = int.Parse(splited_list[2]);
         
             spawnList.Add(spawnData);
         }
