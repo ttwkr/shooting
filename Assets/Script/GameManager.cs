@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        
         nextSpawnDelay = spawnList[spawnIndex].delay;
     }
 
