@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public Transform[] spawnPoints;
 
     public float currSpawnDelay;
-    public float maxSpawnDelay;
+    public float nextSpawnDelay;
     public float rangeSpawn;
 
     public GameObject player;
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         spawnList = new List<Spawn>();
         enemyObjects = new string[]
             {"enemyRed", "enemyOrange", "enemyYello", "enemyGreen", "enemyBlue", "enemyNavy", "enemyPurple"};
+        ReadSpawnFile();
     }
 
     void ReadSpawnFile()
@@ -63,15 +64,16 @@ public class GameManager : MonoBehaviour
             spawnList.Add(spawnData);
         }
         stringReader.Close();
+
+        nextSpawnDelay = spawnList[0].delay;
     }
 
     void Update()
     {
         currSpawnDelay += Time.deltaTime;
-        if (currSpawnDelay > maxSpawnDelay)
+        if (currSpawnDelay > nextSpawnDelay && !spawnEnd)
         {
             SpawnEnemy();
-            maxSpawnDelay = Random.Range(0.5f, rangeSpawn);
             currSpawnDelay = 0;
         }
 
@@ -81,11 +83,35 @@ public class GameManager : MonoBehaviour
 
     void SpawnEnemy()
     {
-        int randomEnemyIndex = Random.Range(0, enemyObjects.Length);
-        int randomPoint = Random.Range(0, 8);
+        int enemyIndex = 0;
+        switch (spawnList[spawnIndex].type)
+        {
+            case "enemyRed":
+                enemyIndex = 0;
+                break;
+            case "enemyOrange":
+                enemyIndex = 1;
+                break;
+            case "enemyYello":
+                enemyIndex = 2;
+                break;
+            case "enemyGreen":
+                enemyIndex = 3;
+                break;
+            case "enemyBlue":
+                enemyIndex = 4;
+                break;
+            case "enemyNavy":
+                enemyIndex = 5;
+                break;
+            case "enemyPurple":
+                enemyIndex = 6;
+                break;
+        }
 
-        GameObject enemy = objectManager.MakeObj(enemyObjects[randomEnemyIndex]);
-        enemy.transform.position = spawnPoints[randomPoint].position;
+        int enemyPoint = spawnList[spawnIndex].point;
+        GameObject enemy = objectManager.MakeObj(enemyObjects[enemyIndex]);
+        enemy.transform.position = spawnPoints[enemyPoint].position;
 
         Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
         Enemy enemyLogic = enemy.GetComponent<Enemy>();
@@ -95,13 +121,13 @@ public class GameManager : MonoBehaviour
         enemyLogic.player = player;
         enemyLogic.objectManager = objectManager;
 
-        if (randomPoint == 6 || randomPoint == 8) //오른쪽 스폰
+        if (enemyPoint == 6 || enemyPoint == 8) //오른쪽 스폰
         {
             enemy.transform.Rotate(Vector3.forward * 45); // 바라보는 방향으로 돌림
             rigid.velocity = new Vector2(enemyLogic.speed, -1);
         }
 
-        else if (randomPoint == 5 || randomPoint == 7) //왼쪽 스폰
+        else if (enemyPoint == 5 || enemyPoint == 7) //왼쪽 스폰
         {
             enemy.transform.Rotate(Vector3.back * 45); // 바라보는 방향으로 돌림
             rigid.velocity = new Vector2(enemyLogic.speed * (-1), -1);
@@ -110,6 +136,16 @@ public class GameManager : MonoBehaviour
         {
             rigid.velocity = new Vector2(0, enemyLogic.speed * (-1));
         }
+        
+        // 리스폰인덱스 증가
+        spawnIndex++;
+        if (spawnIndex == spawnList.Count)
+        {
+            spawnEnd = true;
+            return;
+        }
+
+        nextSpawnDelay = spawnList[spawnIndex].delay;
     }
 
     public void UpdateIcon(Image[] image, int icon)

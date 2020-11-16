@@ -4,3 +4,10 @@
 0.2,enemyRed,2
 0.2,enemyRed,2
 0.2,enemyRed,2
+3,enemyYello,4
+3,enemyYello,4
+0.5,enemyBlue,7
+0.5,enemyBlue,7
+0.5,enemyBlue,7
+0.5,enemyBlue,7
+0.5,enemyBlue,7
