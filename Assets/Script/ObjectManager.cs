@@ -13,6 +13,8 @@ public class ObjectManager : MonoBehaviour
     public GameObject enemyPurplePrefab;
     public GameObject enemyBulletAPrefab;
     public GameObject enemyBulletBPrefab;
+    public GameObject bossBulletAPrefab;
+    public GameObject bossBulletBPrefab;
     public GameObject playerBulletAPrefab;
     public GameObject playerBulletBPrefab;
     public GameObject followerBulletPrefab;
@@ -31,6 +33,8 @@ public class ObjectManager : MonoBehaviour
 
     private GameObject[] enemyBulletA;
     private GameObject[] enemyBulletB;
+    private GameObject[] bossBulletA;
+    private GameObject[] bossBulletB;
     private GameObject[] playerBulletA;
     private GameObject[] playerBulletB;
     private GameObject[] followerBullet;
@@ -54,6 +58,8 @@ public class ObjectManager : MonoBehaviour
 
         enemyBulletA = new GameObject[200];
         enemyBulletB = new GameObject[200];
+        bossBulletA = new GameObject[200];
+        bossBulletB = new GameObject[200];
         playerBulletA = new GameObject[200];
         playerBulletB = new GameObject[200];
         followerBullet = new GameObject[200];
@@ -77,6 +83,8 @@ public class ObjectManager : MonoBehaviour
 
         GenerateObject(enemyBulletA, enemyBulletAPrefab);
         GenerateObject(enemyBulletB, enemyBulletBPrefab);
+        GenerateObject(bossBulletA, bossBulletAPrefab);
+        GenerateObject(bossBulletB, bossBulletBPrefab);
         GenerateObject(playerBulletA, playerBulletAPrefab);
         GenerateObject(playerBulletB, playerBulletBPrefab);
         GenerateObject(followerBullet, followerBulletPrefab);
@@ -159,6 +167,12 @@ public class ObjectManager : MonoBehaviour
                 break;
             case "enemyBulletB":
                 targetPool = enemyBulletB;
+                break;
+            case "bossBulletA":
+                targetPool = bossBulletA;
+                break;
+            case "bossBulletB":
+                targetPool = bossBulletB;
                 break;
             
             // 아이템
