@@ -28,6 +28,7 @@ public class PlayerPlane : MonoBehaviour
     public GameObject PlayerBulletA;
     public GameObject PlayerBulletB;
     public GameObject BoomEffect;
+    public GameObject[] followers;
 
     Animator anim;
 
@@ -105,7 +106,7 @@ public class PlayerPlane : MonoBehaviour
                 rigid2.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
                 break;
 
-            case 3:
+            default:
                 GameObject bulletRR = objectManager.MakeObj("playerBulletA");
                 bulletRR.transform.position = transform.position + Vector3.right * 0.4f;
 
@@ -274,6 +275,7 @@ public class PlayerPlane : MonoBehaviour
                     else
                     {
                         power++;
+                        AddFollower();
                     }
 
                     break;
@@ -293,6 +295,22 @@ public class PlayerPlane : MonoBehaviour
             }
 
             collision.gameObject.SetActive(false);
+        }
+    }
+
+    void AddFollower()
+    {
+        if (power == 4)
+        {
+            followers[0].SetActive(true);
+        }
+        else if (power == 5)
+        {
+            followers[1].SetActive(true);
+        }
+        else if (power == 6)
+        {
+            followers[2].SetActive(true);
         }
     }
 
