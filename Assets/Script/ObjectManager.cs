@@ -11,13 +11,17 @@ public class ObjectManager : MonoBehaviour
     public GameObject enemyGreenPrefab;
     public GameObject enemyNavyPrefab;
     public GameObject enemyPurplePrefab;
+    public GameObject boss1Prefab;
+    
     public GameObject enemyBulletAPrefab;
     public GameObject enemyBulletBPrefab;
     public GameObject bossBulletAPrefab;
     public GameObject bossBulletBPrefab;
+    
     public GameObject playerBulletAPrefab;
     public GameObject playerBulletBPrefab;
     public GameObject followerBulletPrefab;
+    
     public GameObject itemPowerPrefab;
     public GameObject itemBoomPrefab;
     public GameObject itemCoinPrefab;
@@ -30,6 +34,7 @@ public class ObjectManager : MonoBehaviour
     private GameObject[] enemyBlue;
     private GameObject[] enemyNavy;
     private GameObject[] enemyPurple;
+    private GameObject[] boss1;
 
     private GameObject[] enemyBulletA;
     private GameObject[] enemyBulletB;
@@ -55,6 +60,7 @@ public class ObjectManager : MonoBehaviour
         enemyGreen = new GameObject[20];
         enemyNavy = new GameObject[20];
         enemyPurple = new GameObject[20];
+        boss1 = new GameObject[1];
 
         enemyBulletA = new GameObject[200];
         enemyBulletB = new GameObject[200];
@@ -80,6 +86,7 @@ public class ObjectManager : MonoBehaviour
         GenerateObject(enemyGreen, enemyGreenPrefab);
         GenerateObject(enemyNavy, enemyNavyPrefab);
         GenerateObject(enemyPurple, enemyPurplePrefab);
+        GenerateObject(boss1, boss1Prefab);
 
         GenerateObject(enemyBulletA, enemyBulletAPrefab);
         GenerateObject(enemyBulletB, enemyBulletBPrefab);
@@ -148,6 +155,9 @@ public class ObjectManager : MonoBehaviour
                 break;
             case "enemyPurple":
                 targetPool = enemyPurple;
+                break;
+            case "boss1":
+                targetPool = boss1;
                 break;
             
             // 플레이어 총알

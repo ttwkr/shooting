@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     {
         spawnList = new List<Spawn>();
         enemyObjects = new string[]
-            {"enemyRed", "enemyOrange", "enemyYello", "enemyGreen", "enemyBlue", "enemyNavy", "enemyPurple"};
+            {"enemyRed", "enemyOrange", "enemyYello", "enemyGreen", "enemyBlue", "enemyNavy", "enemyPurple", "boss1"};
         ReadSpawnFile();
     }
 
@@ -42,7 +42,8 @@ public class GameManager : MonoBehaviour
         spawnIndex = 0;
         spawnEnd = false;
         
-        TextAsset textFile = Resources.Load("Stage 0") as TextAsset;
+        // TextAsset textFile = Resources.Load("Stage 0") as TextAsset;
+        TextAsset textFile = Resources.Load("boss") as TextAsset;
         StringReader stringReader = new StringReader(textFile.text);
 
         while (stringReader != null)
@@ -107,36 +108,53 @@ public class GameManager : MonoBehaviour
             case "enemyPurple":
                 enemyIndex = 6;
                 break;
+            case "boss1":
+                enemyIndex = 7;
+                break;
         }
 
         int enemyPoint = spawnList[spawnIndex].point;
-        GameObject enemy = objectManager.MakeObj(enemyObjects[enemyIndex]);
-        enemy.transform.position = spawnPoints[enemyPoint].position;
-
-        Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
-        Enemy enemyLogic = enemy.GetComponent<Enemy>();
-
-        // 발사체를 플레이어한테 주기위해 플레이어 변수를 선언
-        // 인스턴스화되지 않은 오브젝트한테 플레이어변수를 주지 않는다
-        enemyLogic.player = player;
-        enemyLogic.objectManager = objectManager;
-
-        if (enemyPoint == 6 || enemyPoint == 8) //오른쪽 스폰
+        
+        if (enemyIndex == 7) // 적이 보스일때
         {
-            enemy.transform.Rotate(Vector3.forward * 45); // 바라보는 방향으로 돌림
-            rigid.velocity = new Vector2(enemyLogic.speed, -1);
-        }
+            GameObject boss = objectManager.MakeObj(enemyObjects[enemyIndex]);
+            boss.transform.position = spawnPoints[enemyPoint].position;
+            Rigidbody2D rigid = boss.GetComponent<Rigidbody2D>();
+            Boss bossLogic = boss.GetComponent<Boss>();
+            rigid.velocity = new Vector2(0,bossLogic.speed*(-1));
 
-        else if (enemyPoint == 5 || enemyPoint == 7) //왼쪽 스폰
-        {
-            enemy.transform.Rotate(Vector3.back * 45); // 바라보는 방향으로 돌림
-            rigid.velocity = new Vector2(enemyLogic.speed * (-1), -1);
+            bossLogic.player = player;
+
         }
         else
         {
-            rigid.velocity = new Vector2(0, enemyLogic.speed * (-1));
+            GameObject enemy = objectManager.MakeObj(enemyObjects[enemyIndex]);
+            enemy.transform.position = spawnPoints[enemyPoint].position;
+
+            Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
+            Enemy enemyLogic = enemy.GetComponent<Enemy>();
+            // 발사체를 플레이어한테 주기위해 플레이어 변수를 선언
+            // 인스턴스화되지 않은 오브젝트한테 플레이어변수를 주지 않는다
+            enemyLogic.player = player;
+            enemyLogic.objectManager = objectManager;
+
+            if (enemyPoint == 6 || enemyPoint == 8) //오른쪽 스폰
+            {
+                enemy.transform.Rotate(Vector3.forward * 45); // 바라보는 방향으로 돌림
+                rigid.velocity = new Vector2(enemyLogic.speed, -1);
+            }
+
+            else if (enemyPoint == 5 || enemyPoint == 7) //왼쪽 스폰
+            {
+                enemy.transform.Rotate(Vector3.back * 45); // 바라보는 방향으로 돌림
+                rigid.velocity = new Vector2(enemyLogic.speed * (-1), -1);
+            }
+            else
+            {
+                rigid.velocity = new Vector2(0, enemyLogic.speed * (-1));
+            }
         }
-        
+                
         // 리스폰인덱스 증가
         spawnIndex++;
         if (spawnIndex == spawnList.Count)

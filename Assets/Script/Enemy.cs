@@ -53,10 +53,6 @@ public class Enemy : MonoBehaviour
 
     public void OnHit(int damage)
     {
-        if (healthy <= 0)
-        {
-            return;
-        }
         healthy -= damage;
         spriteRenderer.sprite = sprites[1];
         Invoke("ReturnSprite", 0.1f);
