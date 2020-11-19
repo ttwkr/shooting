@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -1947097705129849200, guid: df77bf6a2ef974f5791571052a2ff054, type: 3}
+  m_Sprite: {fileID: -4384785637358127729, guid: 49aa6371107de4b9a9c53b296e0eacb0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,7 +123,9 @@ MonoBehaviour:
   healthy: 3000
   patternIndex: -1
   currPatternCount: 0
-  maxPatternCount: 040000000a0000006400000004000000
+  maxPatternCount: 01000000010000000100000005000000
+  bulletCountA: 50
+  bulletCountB: 40
   currShotDelay: 0
   maxShotDelay: 0
   player: {fileID: 0}

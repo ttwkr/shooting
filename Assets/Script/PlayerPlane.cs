@@ -16,6 +16,7 @@ public class PlayerPlane : MonoBehaviour
     public int score;
     public Boolean isHit;
     public Boolean isBoomTime;
+    public Boolean isRespawnTime;
 
     public Boolean isTouchTop;
     public Boolean isTouchBottom;

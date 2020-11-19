@@ -13,6 +13,8 @@ public class Boss : MonoBehaviour
     public int patternIndex;
     public int currPatternCount; // 현재 패턴 횟수
     public int[] maxPatternCount; // 각 패턴별 반복 횟수
+    public int bulletCountA;
+    public int bulletCountB;
     public float currShotDelay;
     public float maxShotDelay;
     public GameObject player;
@@ -128,14 +130,29 @@ public class Boss : MonoBehaviour
         bullet.transform.position = transform.position;
         bullet.transform.rotation = Quaternion.identity;
         Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
-        Vector2 dirVec = new Vector2(Mathf.Sin( Mathf.PI * 2 * currPatternCount / maxPatternCount[patternIndex]), -1);
+        Vector2 dirVec = new Vector2(Mathf.Sin(Mathf.PI * 8 * currPatternCount / maxPatternCount[patternIndex]), -1);
         rigid.AddForce(dirVec.normalized * 5, ForceMode2D.Impulse);
         PatternLogic("FireArc", 0.15f);
     }
 
     void FireAround()
     {
+        int bulletCount = currPatternCount % 2 == 0 ? bulletCountA : bulletCountB; 
         Debug.Log("보스 중심으로 원 형태로 발사");
+        for (int i = 0; i < bulletCount; i++)
+        {
+            GameObject bullet = objectManager.MakeObj("bossBulletA");
+            bullet.transform.position = transform.position;
+            bullet.transform.rotation = Quaternion.identity;
+            Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+            Vector2 dirVec = new Vector2(Mathf.Cos(Mathf.PI * 2 * i / bulletCount),
+                                        Mathf.Sin(Mathf.PI * 2 * i / bulletCount));
+            rigid.AddForce(dirVec.normalized * 2, ForceMode2D.Impulse);
+            
+            Vector3 rotVec = Vector3.forward * 360 * i / bulletCount + Vector3.forward*90;
+            bullet.transform.Rotate(rotVec);
+        }
+
         PatternLogic("FireAround", 0.7f);
     }
 
