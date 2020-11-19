@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour
             rigid.velocity = new Vector2(0,bossLogic.speed*(-1));
 
             bossLogic.player = player;
+            bossLogic.objectManager = objectManager;
 
         }
         else

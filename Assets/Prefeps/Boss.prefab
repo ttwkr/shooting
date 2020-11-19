@@ -121,7 +121,13 @@ MonoBehaviour:
   enemyScore: 500
   speed: 2
   healthy: 3000
+  patternIndex: -1
+  currPatternCount: 0
+  maxPatternCount: 040000000a0000001400000004000000
+  currShotDelay: 0
+  maxShotDelay: 0
   player: {fileID: 0}
+  objectManager: {fileID: 0}
 --- !u!70 &2620792546578662568
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
