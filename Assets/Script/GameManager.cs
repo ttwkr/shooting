@@ -42,8 +42,8 @@ public class GameManager : MonoBehaviour
         spawnIndex = 0;
         spawnEnd = false;
         
-        // TextAsset textFile = Resources.Load("Stage 0") as TextAsset;
-        TextAsset textFile = Resources.Load("boss") as TextAsset;
+        TextAsset textFile = Resources.Load("Stage 0") as TextAsset;
+        // TextAsset textFile = Resources.Load("boss") as TextAsset;
         StringReader stringReader = new StringReader(textFile.text);
 
         while (stringReader != null)
@@ -125,6 +125,7 @@ public class GameManager : MonoBehaviour
 
             bossLogic.player = player;
             bossLogic.objectManager = objectManager;
+            bossLogic.gameManager = this;
 
         }
         else
@@ -137,6 +138,7 @@ public class GameManager : MonoBehaviour
             // 발사체를 플레이어한테 주기위해 플레이어 변수를 선언
             // 인스턴스화되지 않은 오브젝트한테 플레이어변수를 주지 않는다
             enemyLogic.player = player;
+            enemyLogic.gameManager = this;
             enemyLogic.objectManager = objectManager;
 
             if (enemyPoint == 6 || enemyPoint == 8) //오른쪽 스폰
@@ -205,5 +207,14 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void CallExplosion(Vector3 pos, string type)
+    {
+        GameObject explosion = objectManager.MakeObj("explosion");
+        Explosion explosionLogic = explosion.GetComponent<Explosion>();
+
+        explosion.transform.position = pos;
+        explosionLogic.StartExplosion(type);
     }
 }

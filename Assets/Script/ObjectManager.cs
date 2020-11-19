@@ -26,6 +26,8 @@ public class ObjectManager : MonoBehaviour
     public GameObject itemBoomPrefab;
     public GameObject itemCoinPrefab;
 
+    public GameObject explosionPrefab;
+
 
     private GameObject[] enemyRed;
     private GameObject[] enemyOrange;
@@ -47,6 +49,8 @@ public class ObjectManager : MonoBehaviour
     private GameObject[] itemPower;
     private GameObject[] itemBoom;
     private GameObject[] itemCoin;
+
+    private GameObject[] explosion;
 
     private GameObject[] targetPool;
 
@@ -73,6 +77,10 @@ public class ObjectManager : MonoBehaviour
         itemPower = new GameObject[10];
         itemBoom = new GameObject[10];
         itemCoin = new GameObject[20];
+        
+        explosion = new GameObject[20];
+        
+        
 
         Generate();
     }
@@ -99,6 +107,7 @@ public class ObjectManager : MonoBehaviour
         GenerateObject(itemPower, itemPowerPrefab);
         GenerateObject(itemBoom, itemBoomPrefab);
         GenerateObject(itemCoin, itemCoinPrefab);
+        GenerateObject(explosion, explosionPrefab);
     }
 
 
@@ -194,6 +203,10 @@ public class ObjectManager : MonoBehaviour
                 break;
             case "itemCoin":
                 targetPool = itemCoin;
+                break;
+            
+            case "explosion":
+                targetPool = explosion;
                 break;
         }
 

@@ -30,12 +30,45 @@ public class PlayerPlane : MonoBehaviour
     public GameObject PlayerBulletB;
     public GameObject BoomEffect;
     public GameObject[] followers;
-
+    
     Animator anim;
+    SpriteRenderer spriteRenderer;
 
     void Awake()
     {
         anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnEnable()
+    {
+        UnBeatable();
+        Invoke("UnBeatable", 3);
+    }
+
+    void UnBeatable()
+    {
+        isRespawnTime = !isRespawnTime;
+        if (isRespawnTime)
+        {
+            isRespawnTime = true;
+            spriteRenderer.color = new Color(1,1,1,0.5f);
+
+            for(int i = 0; i < followers.Length; i++)
+            {
+                followers[i].GetComponent<SpriteRenderer>().color = new Color(1,1,1,0.5f);
+            }
+        } 
+        else
+        {
+            isRespawnTime = false;
+            spriteRenderer.color = new Color(1,1,1,1);
+            
+            for(int i = 0; i < followers.Length; i++)
+            {
+                followers[i].GetComponent<SpriteRenderer>().color = new Color(1,1,1,1);
+            }
+        }
     }
 
     void Update()
@@ -232,6 +265,11 @@ public class PlayerPlane : MonoBehaviour
 
         else if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
         {
+            if (isRespawnTime)
+            {
+                return;
+            }
+            
             if (isHit)
             {
                 return;
@@ -243,6 +281,7 @@ public class PlayerPlane : MonoBehaviour
             boom = 0;
             manager.UpdateIcon(manager.lifeImage, life);
             manager.UpdateIcon(manager.boomImages, boom);
+            manager.CallExplosion(transform.position, "player");
             if (life == 0)
             {
                 manager.GameOver();

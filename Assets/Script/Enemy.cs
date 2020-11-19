@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     public Sprite[] sprites;
     public GameObject player;
     public ObjectManager objectManager;
+    public GameManager gameManager;
     public string[] itemObject;
 
     public float currShotDelay;
@@ -63,6 +64,7 @@ public class Enemy : MonoBehaviour
             int randomItemIndex = Random.Range(0, 3);
             playerLogic.score += enemyScore;
             gameObject.SetActive(false);
+            gameManager.CallExplosion(transform.position, "Enemy");
             GameObject item = objectManager.MakeObj(itemObject[randomItemIndex]);
             item.transform.position = transform.position;
             transform.rotation = Quaternion.identity;
