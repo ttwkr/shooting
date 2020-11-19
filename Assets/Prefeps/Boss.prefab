@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -1947097705129849200, guid: df77bf6a2ef974f5791571052a2ff054, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   healthy: 3000
   patternIndex: -1
   currPatternCount: 0
-  maxPatternCount: 040000000a0000001400000004000000
+  maxPatternCount: 040000000a0000006400000004000000
   currShotDelay: 0
   maxShotDelay: 0
   player: {fileID: 0}

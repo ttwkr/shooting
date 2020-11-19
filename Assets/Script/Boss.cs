@@ -115,7 +115,7 @@ public class Boss : MonoBehaviour
             Vector2 dirVec = player.transform.position - transform.position;
             Vector2 ranVec = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(0f, 2f));
             dirVec += ranVec;
-            rigid.AddForce(dirVec.normalized * 10, ForceMode2D.Impulse);
+            rigid.AddForce(dirVec.normalized * 4, ForceMode2D.Impulse);
         }
 
         PatternLogic("FireShot", 0.5f);
@@ -124,6 +124,12 @@ public class Boss : MonoBehaviour
     void FireArc()
     {
         Debug.Log("부채모양으로 발사");
+        GameObject bullet = objectManager.MakeObj("bossBulletA");
+        bullet.transform.position = transform.position;
+        bullet.transform.rotation = Quaternion.identity;
+        Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+        Vector2 dirVec = new Vector2(Mathf.Sin( Mathf.PI * 2 * currPatternCount / maxPatternCount[patternIndex]), -1);
+        rigid.AddForce(dirVec.normalized * 5, ForceMode2D.Impulse);
         PatternLogic("FireArc", 0.15f);
     }
 
