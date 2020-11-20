@@ -54,6 +54,11 @@ public class Enemy : MonoBehaviour
 
     public void OnHit(int damage)
     {
+        if (healthy <= 0)
+        {
+            // 애가 죽기전에 한번더 맞는 예외처리
+            return;
+        }
         healthy -= damage;
         spriteRenderer.sprite = sprites[1];
         Invoke("ReturnSprite", 0.1f);

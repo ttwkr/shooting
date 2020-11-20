@@ -57,6 +57,7 @@ public class ObjectManager : MonoBehaviour
     void Awake()
     {
         //한번에 등장할 수를 고려하여 배열길이 할당
+        boss1 = new GameObject[1];
         enemyRed = new GameObject[20];
         enemyOrange = new GameObject[20];
         enemyYello = new GameObject[20];
@@ -64,7 +65,6 @@ public class ObjectManager : MonoBehaviour
         enemyGreen = new GameObject[20];
         enemyNavy = new GameObject[20];
         enemyPurple = new GameObject[20];
-        boss1 = new GameObject[1];
 
         enemyBulletA = new GameObject[200];
         enemyBulletB = new GameObject[200];

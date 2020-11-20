@@ -30,6 +30,7 @@ public class Boss : MonoBehaviour
 
     void OnEnable()
     {
+        healthy = 50;
         Invoke("Stop", 2);
     }
 
@@ -165,6 +166,11 @@ public class Boss : MonoBehaviour
 
     void OnBossHit(int damage)
     {
+        if (healthy <= 0)
+        {
+            // 애가 죽기전에 한번더 맞는 예외처리
+            return;
+        }
         healthy -= damage;
         anim.SetTrigger("OnHit");
 
@@ -176,7 +182,7 @@ public class Boss : MonoBehaviour
             gameManager.CallExplosion(transform.position, "boss");
             transform.rotation = Quaternion.identity;
             gameManager.EndStage();
-            // isDead = true;
+            isDead = true;
         }
     }
 
