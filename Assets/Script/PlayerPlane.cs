@@ -139,8 +139,7 @@ public class PlayerPlane : MonoBehaviour
         transform.position = currPosition + nextPosition;
 
         // 애니메이션
-        if (Input.GetButtonDown("Horizontal") ||
-            Input.GetButtonUp("Horizontal"))
+        if ( joyControl[3] || joyControl[5] )
         {
             anim.SetInteger("Input", (int) horizon);
         }

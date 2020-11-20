@@ -124,8 +124,8 @@ MonoBehaviour:
   patternIndex: -1
   currPatternCount: 0
   maxPatternCount: 01000000010000000100000005000000
-  bulletCountA: 50
-  bulletCountB: 40
+  bulletCountA: 20
+  bulletCountB: 30
   currShotDelay: 0
   maxShotDelay: 0
   player: {fileID: 0}

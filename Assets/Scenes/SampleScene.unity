@@ -4742,7 +4742,7 @@ MonoBehaviour:
   speed: 3
   currShotDelay: 0
   maxShotDelay: 0.2
-  power: 6
+  power: 1
   maxPower: 6
   maxBoom: 3
   boom: 0

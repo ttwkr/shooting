@@ -51,6 +51,7 @@ public class Boss : MonoBehaviour
     {
         if (isDead)
         {
+            currPatternCount = 0;
             return;
         }
         patternIndex = patternIndex == 3 ? 0 : patternIndex + 1;
