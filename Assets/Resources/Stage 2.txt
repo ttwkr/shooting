@@ -1,0 +1,4 @@
+1,enemyRed,2
+1,enemyRed,2
+1,enemyRed,2
+7,boss1,2

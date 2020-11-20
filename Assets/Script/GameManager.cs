@@ -9,8 +9,10 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
+    public int stage;
     public string[] enemyObjects;
     public Transform[] spawnPoints;
+    public Transform playerPos;
 
     public float currSpawnDelay;
     public float nextSpawnDelay;
@@ -27,13 +29,46 @@ public class GameManager : MonoBehaviour
     public List<Spawn> spawnList;
     public int spawnIndex;
     public bool spawnEnd;
-    
+
+    public Animator startAnim;
+    public Animator clearAnim;
+    public Animator fadeAnim;
     private void Awake()
     {
         spawnList = new List<Spawn>();
         enemyObjects = new string[]
             {"enemyRed", "enemyOrange", "enemyYello", "enemyGreen", "enemyBlue", "enemyNavy", "enemyPurple", "boss1"};
+        StartStage();
+    }
+
+    public void StartStage()
+    {
+        //1. stage UI load
+        startAnim.SetTrigger("OnText");
+        startAnim.GetComponent<Text>().text = "Stage "+stage+"\nStart";
+        clearAnim.GetComponent<Text>().text = "Stage "+stage+"\nClear";
+        //2. 적 스폰 파일 로드
         ReadSpawnFile();
+        
+        //3. 페이드인
+        fadeAnim.SetTrigger("On");
+    }
+
+    public void EndStage()
+    {
+        //1.클리어 ui 로드
+        clearAnim.SetTrigger("OnText");
+        fadeAnim.SetTrigger("Out");
+        player.transform.position = playerPos.position;
+        stage++;
+        if (stage > 2)
+        {
+            Invoke("GameOver", 6);
+        }
+        else
+        {
+            Invoke("StartStage", 3);
+        }
     }
 
     void ReadSpawnFile()
@@ -42,7 +77,7 @@ public class GameManager : MonoBehaviour
         spawnIndex = 0;
         spawnEnd = false;
         
-        TextAsset textFile = Resources.Load("Stage 0") as TextAsset;
+        TextAsset textFile = Resources.Load("Stage " + stage) as TextAsset;
         // TextAsset textFile = Resources.Load("boss") as TextAsset;
         StringReader stringReader = new StringReader(textFile.text);
 
@@ -124,8 +159,9 @@ public class GameManager : MonoBehaviour
             rigid.velocity = new Vector2(0,bossLogic.speed*(-1));
 
             bossLogic.player = player;
-            bossLogic.objectManager = objectManager;
             bossLogic.gameManager = this;
+            bossLogic.objectManager = objectManager;
+            
 
         }
         else

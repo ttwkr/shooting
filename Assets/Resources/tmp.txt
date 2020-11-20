@@ -24,4 +24,3 @@
 0.5,enemyBlue,7
 0.5,enemyBlue,7
 0.5,enemyBlue,7
-4,boss1,2

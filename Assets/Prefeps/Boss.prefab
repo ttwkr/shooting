@@ -120,7 +120,7 @@ MonoBehaviour:
   enemySize: boss
   enemyScore: 500
   speed: 2
-  healthy: 3000
+  healthy: 5
   patternIndex: -1
   currPatternCount: 0
   maxPatternCount: 01000000010000000100000005000000
@@ -130,6 +130,8 @@ MonoBehaviour:
   maxShotDelay: 0
   player: {fileID: 0}
   objectManager: {fileID: 0}
+  gameManager: {fileID: 0}
+  isDead: 0
 --- !u!70 &2620792546578662568
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

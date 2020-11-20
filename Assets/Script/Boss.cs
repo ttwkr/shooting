@@ -21,6 +21,7 @@ public class Boss : MonoBehaviour
     public ObjectManager objectManager;
     public GameManager gameManager;
     private Animator anim;
+    public bool isDead;
 
     private void Awake()
     {
@@ -41,12 +42,16 @@ public class Boss : MonoBehaviour
 
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
         rigid.velocity = Vector2.zero;
-
+        // isDead = false;
         Invoke("Think", 2);
     }
 
     void Think()
     {
+        if (isDead)
+        {
+            return;
+        }
         patternIndex = patternIndex == 3 ? 0 : patternIndex + 1;
         currPatternCount = 0; // 현재 패턴 횟수 초기화
         switch (patternIndex)
@@ -167,9 +172,11 @@ public class Boss : MonoBehaviour
         {
             PlayerPlane playerLogic = player.GetComponent<PlayerPlane>();
             playerLogic.score += enemyScore;
-            gameManager.CallExplosion(transform.position, "boss");
             gameObject.SetActive(false);
+            gameManager.CallExplosion(transform.position, "boss");
             transform.rotation = Quaternion.identity;
+            gameManager.EndStage();
+            // isDead = true;
         }
     }
 
