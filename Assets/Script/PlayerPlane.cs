@@ -31,6 +31,14 @@ public class PlayerPlane : MonoBehaviour
     public GameObject BoomEffect;
     public GameObject[] followers;
     
+    //뱡향키
+    public bool[] joyControl;
+    public bool isPress;
+    
+    //공격 폭탄 버튼
+    public bool isAttackButtonPress;
+    public bool isBoomButtonPress;
+    
     Animator anim;
     SpriteRenderer spriteRenderer;
 
@@ -79,16 +87,48 @@ public class PlayerPlane : MonoBehaviour
         Reload();
     }
 
+    public void JoyPannel(int type)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            joyControl[i] = i == type;
+        }
+    }
+
+    public void JoyUp()
+    {
+        isPress = false;
+    }
+
+    public void JoyDown()
+    {
+        isPress = true;
+    }
+
+
     void Move()
     {
+        // 키보드용 방향키
         float horizon = Input.GetAxisRaw("Horizontal"); // x축 방향
-        if ((isTouchRight && horizon == 1) || (isTouchLeft && horizon == -1))
+        float vertical = Input.GetAxisRaw("Vertical"); // y축 방향
+        
+        //조이패드용 
+        if(joyControl[0]){ horizon=-1; vertical = 1;}
+        if(joyControl[1]){ horizon=0; vertical = 1;}
+        if(joyControl[2]){ horizon=1; vertical = 1;}
+        if(joyControl[3]){ horizon=-1; vertical = 0;}
+        if(joyControl[4]){ horizon=0; vertical = 0;}
+        if(joyControl[5]){ horizon=1; vertical = 0;}
+        if(joyControl[6]){ horizon=-1; vertical = -1;}
+        if(joyControl[7]){ horizon=0; vertical = -1;}
+        if(joyControl[8]){ horizon=1; vertical = -1;}
+
+        if ((isTouchRight && horizon == 1) || (isTouchLeft && horizon == -1) || !isPress)
         {
             horizon = 0;
         }
-
-        float vertical = Input.GetAxisRaw("Vertical"); // y축 방향
-        if ((isTouchTop && vertical == 1) || (isTouchBottom && vertical == -1))
+        
+        if ((isTouchTop && vertical == 1) || (isTouchBottom && vertical == -1) || !isPress)
         {
             vertical = 0;
         }
@@ -106,9 +146,29 @@ public class PlayerPlane : MonoBehaviour
         }
     }
 
+    public void AttackButtonDown()
+    {
+        isAttackButtonPress = true;
+    }
+
+    public void AttackButtonUp()
+    {
+        isAttackButtonPress = false;
+    }
+
+    public void BoomButtonDown()
+    {
+        isBoomButtonPress = true;
+    }
+    
     void Fire()
     {
-        if (!Input.GetButton("Fire1"))
+        // if (!Input.GetButton("Fire1"))
+        // {
+        //     return;
+        // }
+
+        if (!isAttackButtonPress)
         {
             return;
         }
@@ -165,7 +225,12 @@ public class PlayerPlane : MonoBehaviour
 
     void FireBoom()
     {
-        if (!Input.GetButton("Fire2"))
+        // if (!Input.GetButton("Fire2"))
+        // {
+        //     return;
+        // }
+
+        if (!isBoomButtonPress)
         {
             return;
         }
@@ -222,6 +287,8 @@ public class PlayerPlane : MonoBehaviour
                 bulletB[i].SetActive(false);
             }
         }
+
+        isBoomButtonPress = false;
     }
 
     void ObjectForSyntax(GameObject[] obj)
