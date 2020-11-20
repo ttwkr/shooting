@@ -43,7 +43,7 @@ public class Boss : MonoBehaviour
 
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
         rigid.velocity = Vector2.zero;
-        // isDead = false;
+        isDead = false;
         Invoke("Think", 2);
     }
 
